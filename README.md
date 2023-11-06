@@ -1,11 +1,11 @@
-# 🛰️ fix-wiring-js
-The Fixing Wiring mini game from Among Us written in JavaScript canvas. You can play this with a mouse or touch screen.
+# 🛰️ fix-wires-js
+The Fix Wiring mini game from Among Us written in JavaScript canvas. You can play this with a mouse or touch screen.
 
 I initially started this as a dweet (on [Dwitter](https://beta.dwitter.net)) and then it just became a larger project. So much of the code is minified and not very readable. I did leave comments though. It oddly took a long time to implement touch capability.
 
 I might go back and turn it into more readable code. But it was fun figuring out how to use mouse and touch actions.
 
-👉🏻 [Try it](https://lewdev.github.io/apps/fix-wiring) 👈🏻
+👉🏻 [Try it](https://lewdev.github.io/apps/fix-wires-js) 👈🏻
 
 ## 🛠️ Tools & Resources used
 
