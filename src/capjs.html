@@ -27,9 +27,21 @@
   <!-- Emoji SVG favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛰️</text></svg>">
 
-  <style>html,body{background:#222;display:flex;justify-content:center;align-items:center;height:100%;margin:0}#c{background:white;max-height:100%;max-width:100%}</style>
+  <style>
+  html,body{background:#222;display:flex;justify-content:center;align-items:center;height:100%;margin:0}
+
+  #c{background:white;max-height:100%;max-width:100%}
+
+  #sourceBtn {
+    position:fixed; top: 0; right: 0; width: 8rem; background-color: #CCC
+  }
+  </style>
 </head>
 <body>
+<div id="sourceBtn">
+  <a href="https://github.com/lewdev/fix-wires-js" target="_blank" title="Source code">👨🏻‍💻 Source Code</a>
+</div>
+
 <canvas id=c width=1920 height=1080></canvas>
 <script>x=c.getContext`2d`,lfr=1,S=Math.sin,C=Math.cos,T=Math.tan,R=(r,g,b,a=1)=>`rgba(${r|0},${g|0},${b|0},${a})`,t=f=nfm=0;
 
@@ -55,16 +67,19 @@ x.stroke()
 //Draw rectangle; d = color, also draws black border
 R=(d,x1,y1,w,h)=>(d==B?0:R(B,x1-5,y1-5,w+10,h+10),x.fillStyle=d,x.fillRect(x1,y1,w,h))
 
+J=(s,x1,y1,z='1in"')=>(x.font=z,x.fillStyle=B,x.fillText(s,x1,y1));
+
 //E = completed matches
 //F = shuffled squares
 D=["red","#0F0","#00F","#FF0","#F0F"]
+G="ABCDE"
 
 // clear completed lines and reshuffle opposite side
 init=_=>(E=[],F=sy([...D]))
 
 z=t=>{
 //draw background and initialize values
-t?R("#888",0,0,W,T):(init(x.font='3in"'),Z=0,X=Y=r=c.getBoundingClientRect(),H=216,I=-1)
+t?R("#888",0,0,W,T):(init(),Z=0,X=Y=r=c.getBoundingClientRect(),H=216,I=-1)
 
 //set the XY coordinates of mouse / touch based on bounding rectangle
 M=(x1,y1)=>(X=(x1-r.left)*W/r.width,Y=(y1-r.top)*T/r.height)
@@ -95,14 +110,16 @@ F.map((d,i)=>(R(F[i],W-H,i*H,H,H)))
 //draw left squares and completed lines
 D.map((d,i)=>(
   R(d,0,i*H,H,H)
-  ,E[i]?L(D[i],H/2,i*H+110,W-H/2,F.indexOf(D[i])*H+110):0
+  ,E[i]?L(D[i],H/2,i*H+110,W-H/2,F.indexOf(D[i])*H+110):0,
+  J(G[i],H/2-30,i*H+H/2+20), //left letters
+  J(G[i],W-H/2-30,F.indexOf(D[i])*H+H/2+20) //right letters
 ))
 
 //draw clicked line
 I>-1?L(D[I],H/2,I*H+(H/2),X,Y):0
 
 //draw "DONE" when all completed
-Z?(x.fillStyle=B,x.fillText("Done",200,500)):0
+Z?(x.fillStyle=B,J("Done",400,500,'3in"')):0
 
 
 };loop=fTime=>{requestAnimationFrame(loop);if(lfr&&fTime<nfm-2)return;nfm=Math.max(nfm+1e3/60,fTime);t=f/60;if(t*60|0!=f++)t+=1e-6;z(t)};loop()
